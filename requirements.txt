@@ -53,7 +53,7 @@ django-submodel==0.1
 django-test-without-migrations==0.6
 django-utils==0.0.2
 django-warrant==0.1.0
-djangorestframework==3.7.7
+djangorestframework==3.9.1
 djangorestframework-camel-case==1.0.3
 docutils==0.14
 docker-py==1.10.6
