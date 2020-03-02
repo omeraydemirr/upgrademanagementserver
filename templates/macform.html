@@ -1,0 +1,332 @@
+
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+    <!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>Add Mac Adress</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+<link href="/static/que/css/multi.select.css" rel="stylesheet" type="text/css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+<!--===============================================================================================-->
+	<link rel="icon" type="image/png" href="/static/form/images/icons/bla.ico"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/static/form/vendor/bootstrap/css/bootstrap.min.css" >
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/static/form/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/static/form/fonts/iconic/css/material-design-iconic-font.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/static/form/vendor/animate/animate.css" >
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/static/form/vendor/css-hamburgers/hamburgers.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/static/form/vendor/animsition/css/animsition.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/static/form/vendor/select2/select2.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/static/form/vendor/daterangepicker/daterangepicker.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/static/form/vendor/noui/nouislider.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/static/form/css/util.css">
+	<link rel="stylesheet" type="text/css" href="/static/form/css/main.css">
+<!--===============================================================================================-->
+    <!-- owl carousel css-->
+    <link rel="stylesheet" href="/static/form/css/solution/owl-carousel/assets/owl.carousel.min.css" type="text/css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/static/form/css/solution/css/bootstrap.min.css">
+    <!-- custom CSS -->
+    <link rel="stylesheet" href="/static/form/css/solution/css/style.css" >
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light" id="gtco-main-nav">
+    <div class="container"><a href="/"><img src="https://static.wixstatic.com/media/6b3509_3a379fb7ab874f9789302e7c45ce40b6~mv2_d_4434_1692_s_2.png/v1/fill/w_199,h_76,al_c,q_80,usm_0.66_1.00_0.01/6b3509_3a379fb7ab874f9789302e7c45ce40b6~mv2_d_4434_1692_s_2.webp"></a>
+        <button class="navbar-toggler" data-target="#my-nav" onclick="" data-toggle="collapse"><span
+                class="bar1"></span> <span class="bar2"></span> <span class="bar3"></span></button>
+        <div id="my-nav" class="collapse navbar-collapse">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item"><a class="nav-link" href="cloud/upload"><div class="box"><b>Upload Form</b></div></a></li>
+                <li class="nav-item"><a class="nav-link" href=""><div class="box">Add MacAddress</div></a></li>
+
+{% if sessionvalue == 'super' %}
+
+                                           <li class="nav-item"><a class="nav-link" href="/loglist"><div class="box"><b>List</b></div></a></li>
+
+                    <li class="nav-item"><a class="nav-link" href="/addplatform"><div class="box"><b>Add Platform</b></div></a></li>
+                <li class="nav-item"><a class="nav-link" href="/deletefirmware"><div class="box"><b>Delete Firmware</b></div></a></li>
+
+                    <li class="nav-item"><a class="nav-link" href="/platformdelete"><div class="box"><b>Delete Platform-Mac</b></div></a></li>
+{% endif %}
+
+            </ul>
+
+        </div>
+    </div>
+</nav>
+
+
+<div class="container-contact100">
+    <div class="wrap-contact100 col-lg-7" style="max-width: 900px;margin-bottom:100px;">
+
+				<span class="contact100-form-title">
+					Mac Address Adding
+				</span>
+<!-- "Show" button -->
+
+
+<center><button id="show1">*READ HOW TO USE FORM</button></center>
+        <dialog class="wrap-contact100 col-lg-10" style="display: none; width:auto;height:auto;position:relative;padding-top:14px;padding-bottom: 14px;margin:0 auto" id="dialog1">
+            <p><li style="list-style-type: square"><font size="4px"> In order to send form correctly , first of all <b>Platform Type</b> must be choosen from drop-down list. </font></li> </p>
+<p><li style="list-style-type: square"><font size="4px"> If its chosen , <b>Mac Addresss</b> must be written which will add to selected Platform Type.</font></li> </p>
+            <p><li style="list-style-type: square"><font size="4px">After the <b>Platform Type</b> is selected and <b>Mac Address</b> is written , <b>Send Values</b> button must be clicked. </font></li> </p>
+            <p><li style="list-style-type: square"><font size="4px">If form failed to send , altough both values were filled or desired value isnt exists ,you should contact with <b>Adminastrator</b> </font></li> </p>
+
+
+            {% if sessionvalue == 'super' %}
+
+            <center> <p><q><font size="4px">If you do not see the desired value,you should go <a href="/addplatform" style="font-family: Lato-Bold;color: #1b6d85;font-size: 20px" > Platform Type Adding Form</a> </font></q> </p></center>
+{% endif %}
+
+
+<center><button id="hide1" ><u>Close</u></button></center>
+</dialog>
+
+<br>
+        <form enctype="multipart/form-data" method="POST" id="macform">
+{% csrf_token %}
+
+
+
+<div class="col-lg-10 " style="margin:0 auto;text-align: center;padding:3px ">
+    <select class="wrap-input100 button" style="text-align-last: center;margin-bottom:0;margin-top:0;" id = "users">
+        <option selected="true" disabled="disabled" style="text-align-last: center;text-align: center" >Select Platform ID from Platform List   </option>
+   		{% for item in platformTypes %}
+   			<option class="multi-button" style="text-align-last: center;" value = {{item.PlatformType}}>{{item.PlatformType}}</option>
+   		{% endfor %}
+   	</select>
+   </div>
+        <br>
+            <div class="col-lg-10" style="margin:0 auto;">
+                  <div class="wrap-input100 col-lg-12" style="margin:0 auto;display: none" id="groups"></div>
+    </div>
+
+
+
+
+<br>
+    <div class="wrap-input100 validate-input bg-light col-lg-10 " style="margin:0 auto;border-radius: 20px">
+    {{ form.MacAddr|as_crispy_field }}
+    </div>
+        <hr>
+
+            <div class="button button-small button-red fill test-values contact100-form-btn col-lg-7 " style="margin:0 auto" id="sendButton">Send Values
+                <i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i></div>
+
+			</form>
+		</div>
+	</div>
+
+
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+    <script src="/static/que/js/multi.select.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+
+  <script type="text/javaScript">
+    (function() {
+        var dialog1 = document.getElementById('dialog1');
+        document.getElementById('show1').onclick = function() {
+        document.getElementById('dialog1').style.display = 'block';
+    };
+        document.getElementById('hide1').onclick = function() {
+        document.getElementById('dialog1').style.display = 'none';
+    };
+})();
+</script>
+<script type="text/javascript">
+
+
+
+    $(document).ready(function() {
+
+        $('#multi_mac').multi_select({
+        selectColor: 'purple',
+        selectSize: 'medium',
+        duration: 300,
+        easing: 'slide',
+        listMaxHeight: 300,
+        selectedCount: 2,
+        sortByText: true,
+        fillButton: true,
+
+    });
+
+
+
+        /* when groupd is selected from drop-down list */
+ $('#groups').on('click', function(event){
+        groupNums = $("#groups").multi_select("getSelectedValues");
+
+
+
+        if (groupNums.length > 1)
+        {
+            $("#groups").multi_select("clearValues")
+            Swal.fire({
+                    type: 'error',
+                    title: 'Platform Type and Group ID must be selected SINGLE !',
+                });
+
+        }
+
+});
+
+
+
+
+      $("#users").change(function(e){
+        e.preventDefault();
+        $("#groups").show();
+        var platformType = $(this).val();
+        var data = {platformType};
+        $.ajax({
+            type : 'POST',
+            url :  "{% url 'get_mac_info' %}",
+            data : data,
+            csrfmiddlewaretoken: "{{ csrf_token }}",
+
+            success : function(response) {
+
+
+
+                groupJson = {};
+                for (item of response.groupNumbers) {
+                    group = item.GroupID;
+                    groupJson[group] = group;
+                }
+
+                console.log(groupJson);
+                console.log(group);
+
+                // show group numbers according to platform type
+                $("#groups").multi_select({
+                    data: groupJson,
+                });
+
+            },
+            error : function(response){
+                console.log(response)
+            }
+        });
+
+    });
+
+
+
+
+
+
+        $('#sendButton').on("click",function (event) {
+            Swal.fire('Please wait');
+            Swal.showLoading();
+            event.preventDefault();
+
+            if(document.cookie.indexOf('session') > 0)
+            {
+
+                     if ($("#users").val() === null ){
+                         Swal.fire({
+                            type: 'error',
+                            title: 'Platform Type and Group ID must be selected SINGLE !',
+                        })
+                     }
+                     else{
+
+                         var data = new FormData($('#macform').get(0));
+                         data.append("MacAddr",$("#id_MacAddr").val());
+                         data.append("platformType",$("#users").val());
+                         platformType = $("#users").val();
+                         MacAddr = $("#id_MacAddr").val();
+                         GroupIDS = $("#groups").multi_select("getSelectedValues");
+                         if(platformType !== null || {GroupIDS} !== null || {GroupIDS}.length !== 0 || document.cookie.indexOf('sessionid') > 0){
+                            $.ajax({
+                                type : "POST",
+                                url:"{% url 'macadress' %}",
+                                csrfmiddlewaretoken: "{{ csrf_token }}",
+                                data: data,
+                                processData: false,
+                                contentType: false,
+                                success:function () {
+                                    $.ajax({
+                                    type : "POST",
+                                    url:"{% url 'macadress' %}",
+                                    data : {
+                                        "platformType": platformType,
+                                        "MacAddr" : MacAddr,
+                                        "GroupIDS" : GroupIDS[0],
+
+                                    },
+                                          csrfmiddlewaretoken: "{{ csrf_token }}",
+                                        success:function () {
+                                            var msg = "Mac Addr '" + MacAddr + "' added to platform '"+ platformType + "'";
+                                            Swal.fire({
+                                                title:msg,
+                                                type:'success',
+                                                showCloseButton: true,
+                                            }).then((result) => {
+                                                window.location.href = '/cloud/upload';
+                                            });
+
+                                        },
+                                        error:function () {
+                                            var msg = "Failed adding Mac Address '" + MacAddr + "' to platform '"+ platformType + "'";
+                                            Swal.fire({
+                                            type: 'error',
+                                             title: msg,
+                                            }).then((result) => {
+                                                window.location.href = '';
+                                            })
+                                        },
+                     })},
+
+                                  error:function () {
+                                     Swal.fire({
+                                         type: 'error',
+                                         title: "All options must be filled!",
+                                     }).then((result) => {
+                                                window.location.href = '';
+                                     })
+                                 }
+                            })
+                        }
+                     }
+        }
+            else
+            {
+                      Swal.fire({
+                            type: 'error',
+                            title: 'LOGIN EXPIRE!',
+                            text: 'Your request could not send!'
+                        }).then((result) => {
+                          window.location.href = '/loginpage';
+                                     })
+            }
+
+                });
+            });
+    </script>
+
+<footer class="card-footer" style="background-image: linear-gradient(450deg, #2c829c, #244f6c);bottom: 0; padding: 8px; width: 100%; position: fixed; text-align: center; left: 0;z-index:1000">
+    <div><a style="font-family:Lato-Bold;color: white;">Version: 0.1.2</a></div>
+    <div style="font-family:Lato-Bold;color: white"><i class="fa fa-copyright fa-fw"></i>2019 by <a href="https://www.bla-bla.com/" target="_blank" style="font-family:Lato-Bold;color: white; font-size: 17px">bla-bla</a></div>
+</footer>
+
+</body>
+</html>

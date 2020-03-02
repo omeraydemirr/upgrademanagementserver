@@ -1,0 +1,975 @@
+{% extends "base.html" %}
+{% block head %}
+	<title>Firmware Upload Form</title>
+
+{% endblock %}
+
+
+{% block content %}
+
+
+<head>
+
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href= "/static/form/vendor/bootstrap/css/bootstrap.min.css" >
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/static/form/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/static/form/fonts/iconic/css/material-design-iconic-font.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/static/form/vendor/animate/animate.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/static/form/vendor/css-hamburgers/hamburgers.min.css" >
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/static/form/vendor/animsition/css/animsition.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/static/form/vendor/select2/select2.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/static/form/vendor/daterangepicker/daterangepicker.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/static/form/vendor/noui/nouislider.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/static/form/css/util.css">
+	<link rel="stylesheet" type="text/css" href="/static/form/css/main.css">
+<!--===============================================================================================-->
+    <!-- owl carousel css-->
+    <link rel="stylesheet" href="/static/form/css/solution/owl-carousel/assets/owl.carousel.min.css" type="text/css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/static/form/css/solution/css/bootstrap.min.css">
+    <!-- custom CSS -->
+    <link rel="stylesheet" href="/static/form/css/solution/css/style.css" >
+</head>
+
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light" id="gtco-main-nav">
+    <div class="container"><a href="/"><img src="https://static.wixstatic.com/media/6b3509_3a379fb7ab874f9789302e7c45ce40b6~mv2_d_4434_1692_s_2.png/v1/fill/w_199,h_76,al_c,q_80,usm_0.66_1.00_0.01/6b3509_3a379fb7ab874f9789302e7c45ce40b6~mv2_d_4434_1692_s_2.webp"></a>
+        <button class="navbar-toggler" data-target="#my-nav" onclick="" data-toggle="collapse"><span
+                class="bar1"></span> <span class="bar2"></span> <span class="bar3"></span></button>
+        <div id="my-nav" class="collapse navbar-collapse">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item"><a class="nav-link" href=""><div class="box">Upload Form</div></a></li>
+    <li class="nav-item"><a class="nav-link" href="/macadress"><div class="box"><b>Add MacAddress</b></div></a></li>
+
+
+
+{% if sessionvalue == 'super' %}
+                       <li class="nav-item" name=""><a class="nav-link" href="/loglist"><div class="box"><b>List</b></div></a></li>
+
+                    <li class="nav-item"><a class="nav-link" href="/addplatform"><div class="box"><b>Add Platform</b></div></a></li>
+                               <li class="nav-item"><a class="nav-link" href="/deletefirmware"><div class="box"><b>Delete Firmware</b></div></a></li>
+                    <li class="nav-item"><a class="nav-link" href="/platformdelete"><div class="box"><b>Delete Platform-Mac</b></div></a></li>
+{% endif %}
+
+            </ul>
+
+        </div>
+    </div>
+</nav>
+
+<div class="container-contact100">
+    <div class="wrap-contact100 col-lg-11" style="margin-bottom: 100px;">
+
+				<span class="contact100-form-title" style="padding-bottom: 15px">
+					bla - Firmware Upload Form
+				</span>
+
+
+
+
+<!-- "Show" button -->
+
+
+<center><button id="show1">*READ HOW TO USE UPLOAD FORM</button></center>
+        <dialog class="wrap-contact100 " style="
+        display: none; width:auto;height:auto;position:relative;padding-top:14px;padding-bottom: 14px;margin-top:5px;margin-bottom:5px;" id="dialog1">
+<p><li style="list-style-type: square"><font size="4px">Before start to use this form , to show <b>Uploaded Firmwares</b> or <b>Mac Addresses</b> , firstly <b>Platform Type</b> must be chosen from drop-down list.
+
+        If its chosen , <b>Default Firmwares</b> which that Platform Type have will be open under of <b>Default Firmwares List</b> . Also choosing item from <b>Platform List</b> provides to show <b>Mac Address</b> which that have. Morover depends on the situation , single or multiple <b>Mac Address</b> can be chosen from list for upload firmware. On the other hand , <b>Firmwares</b> which <b>Mac Address</b> have can be seen when  its selected <u>single</u> .
+
+        On the other hand , from <b>Uploaded Firmwares</b> drop-down list , choosing <u>single</u> <b>Firmware</b> , it would be uploaded to another <b>Mac Addresses</b> but it wouldnt be uploaded as a <b>Default Firmware</b> !</font>
+        </li> </p>
+
+            <p><li style="list-style-type: square;"><font size="4px">First of all , only <u>single</u> firmware file can be uploaded so <u>File</u> must be choosen. </font></li> </p>
+                        <p><li style="list-style-type: square;"><font size="4px">After file choosen , <b>Platform Type </b> must be selected. </font></li> </p>
+             <p><li style="list-style-type: square;"><font size="4px">  <b>WARNING:</b> After file choosen and only <b>Platform Type </b> is selected without <b>Mac Address</b> , if <u>Send Selected Button</u> is clicked ,
+        the <b>Firmware</b> will be uploaded as a <b>Default Firmware</b> of selected <b>Platform Type</b>.</font></li> </p>
+
+                        <p><li style="list-style-type: square;"><font size="4px">After <b>Platform Type</b> is selected , <b>Mac Address</b> which it has can be selected <u>single</u> or <u>multiple.</u> </font></li> </p>
+
+                                    <p><li style="list-style-type: square;"><font size="4px">After file choosen , <b>Platform Type </b> must be selected. </font></li> </p>
+
+
+
+
+            <center> <p><q><font size="4px">Finally <b> Send Selected Values</b> button must be clicked , If <b>Mac Address</b> is selected , the <b>Firmware</b> will be upload to selected Mac Adress or Adresses , If only <b>Platform Type</b> is selected
+            , it will be upload to only Platform as a <b>Default Firmware</b>.
+            </font></q> </p></center>
+
+
+<br>
+<center><button id="hide1" ><u>Close</u></button></center>
+</dialog>
+
+
+
+
+
+
+
+
+
+<br>
+
+<div style="">
+    <form id="dataForm" enctype="multipart/form-data" style="margin:0 auto" method="POST">
+
+
+
+     <div class="wrap-input100 bg-light col-lg-4 " style="float:left;height: 450px;min-width:36%;margin:20px auto">
+      <div class="wrap-input validate-input bg1 col-lg-12 ">
+          <div class="form-horizontal">
+   </div>
+     </div>
+                         <center><b>*Platform Type List</b></center>
+
+
+   <select class="wrap-input100 button col-lg-12" style="text-align-last: center;margin-bottom:0;margin-top:23px;" id = "users" >
+        <option selected="true" disabled="disabled" style="text-align-last: center;" >Select Platform ID from Platform List   </option>
+
+   		{% for item in platformTypes %}
+   			<option class="dropdown" style="text-align-last: center;" value = {{item.PlatformType}}>{{item.PlatformType}}</option>
+   		{% endfor %}
+
+   	</select>
+     <br>
+           <br>
+                              <center><b>*Group ID List</b></center>
+
+           <div class="" style="" id="groups"></div>
+
+
+<br>
+<br>
+<ul class="wrap-input100 col-lg-12" style="font-family:Arial, sans-serif; border-collapse: collapse;list-style: none" id="default_firmware_table" >
+
+    <center><b>Default Firmwares:</b></center>
+        </ul>
+
+
+     </div>
+
+
+
+
+         <div class="wrap-input100 bg-light col-lg-7" style="float:right;height: 450px;min-width: 63%;margin:20px auto">
+                <center><b>*Select MAC Address to show firmwares</b></center>
+
+         <br>
+        <div class="wrap-input100" style="" id="multi_mac"></div>
+
+             <br>
+                                    <div style="margin:0 auto;" id="renew"></div>
+
+             <br>
+        <ul class="wrap-contact100 bg-light" style="list-style:none; width: auto; height: auto; padding: 2px;margin-top:25px" id="firmware_table">
+            <center><b>Select 'single' mac address in order to show firmwares !</b></center>
+        </ul>
+
+     </div>
+        <br>
+    <div style="margin:0 auto;min-width: 45%;max-width: 33%">
+                    <ul class="" style="" id="multi_firmware">       </ul>
+</div>
+    </form>
+</div>
+
+<br>
+<br>
+
+
+<div class="">
+
+             <form id="fileForm" class="" enctype="multipart/form-data" method="POST" style="margin:0 auto;">
+{% csrf_token %}
+<div class=" " style="" data-validate="">
+   <center> <font style="font-family: Lato-Bold;"><b>or</b>  {{ form.file }}</font></center>
+</div>
+</form>
+</div>
+
+        <div class="col-lg-12" style="float:left;margin-top:30px">
+
+
+            <hr>
+   <div class="button button-green fill test-values contact100-form-btn col-lg-4"  style="margin:0 auto" id="get_values">Send Selected Values <i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i></div>
+              <br>
+                <div class="button button-small button-red fill test-values contact100-form-btn col-lg-4" style="margin:0 auto" id="clear_values">Clear Selected Values &#8635;</div>
+
+
+        </div>
+
+          </div>
+
+    </div>
+</div>
+</div>
+    </div>
+</div>
+</div>
+
+{% endblock %}
+
+{% block script %}
+  <script type="text/javaScript">
+    (function() {
+        var dialog1 = document.getElementById('dialog1');
+        document.getElementById('show1').onclick = function() {
+        document.getElementById('dialog1').style.display = 'block';
+    };
+        document.getElementById('hide1').onclick = function() {
+        document.getElementById('dialog1').style.display = 'none';
+    };
+})();
+</script>
+
+
+
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+    <script src="/static/que/js/multi.select.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+
+
+<script type="text/javascript">
+    $(document).ready(function(){
+
+    $('#multi_mac').multi_select({
+        selectColor: 'purple',
+        selectSize: 'medium',
+        duration: 300,
+        easing: 'slide',
+        listMaxHeight: 300,
+        selectedCount: 2,
+        sortByText: true,
+        fillButton: true,
+
+    });
+
+
+
+
+    $('#multi_mac').multi_select({
+        selectText: 'Choose MAC Addresses',
+    });
+
+    $('#multi_firmware').multi_select({
+        selectText: 'Select from Uploaded Firmware Files',
+    });
+
+
+      $('#multi_firmware').on('click', function(){
+          selected = $("#multi_mac").multi_select("getSelectedValues");
+        let selectedStr = JSON.stringify({selected});
+
+        if(selected.length === 0)
+        {
+          Swal.fire({
+            type: 'error',
+            title: "Uploaded Firmwares list can not be used for uploading to Platform , you must choose Mac Address!",
+        });
+        }
+
+
+        let files = $("#id_file")[0].files[0];
+
+        let filename = "";
+        if (files !== undefined) {
+            filename = files["name"];
+        }
+        if (filename !== "")
+        {
+                Swal.fire({
+                    type: 'error',
+                    title: "You cant upload file from list and file field at same time!",
+                });
+        }
+});
+
+    $('#id_file').on('click', function(event){
+        firmware = $("#multi_firmware").multi_select("getSelectedValues");
+        if (firmware.length !== 0)
+        {
+                    event.preventDefault();
+
+                Swal.fire({
+                    type: 'error',
+                    title: "You cant upload file from list and file field at same time!",
+                });
+        }
+});
+
+
+        /* when groupd is selected from drop-down list */
+ $('#groups').on('click', function(event){
+        groupNums = $("#groups").multi_select("getSelectedValues");
+
+        if (groupNums.length > 1)
+        {
+            $("#groups").multi_select("clearValues");
+            $("#multi_mac").multi_select("clearValues");
+            $('#users').val("").trigger("change");
+
+            Swal.fire({
+                    type: 'error',
+                    title: 'Platform Type and Group ID must be selected SINGLE !',
+                });
+
+        }
+        else if (groupNums.length === 0)
+        {
+            $("#multi_mac").multi_select("clearValues");
+
+        }
+
+});
+
+    /* show macs with respect to group ids */
+     $('#groups').on('click',function () {
+          var groups = $(this).multi_select("getSelectedValues");
+          var data = {groups};
+
+
+
+          $.ajax({
+            type : 'POST',
+            url :  "{% url 'get_group_info' %}",
+            data : data,
+            csrfmiddlewaretoken: "{{ csrf_token }}",
+
+               success : function(response) {
+                    console.log('heloo');
+                    macJson = {};
+                    for(item of response.macs)
+                    {
+                        macs = item.MacAddr;
+                        macJson[macs] = macs;
+                    }
+
+
+                         // show macs with respect to group id
+                    $("#multi_mac").multi_select({
+                    data : macJson,
+
+                })
+                    },
+                 error: function () {
+                    console.log('aaaada')
+                 }
+
+
+
+          })
+
+
+      });
+
+    /* send selected mac and platform type values with the firmware file */
+    $('#get_values').on('click', function(event){
+
+    if(document.cookie.indexOf('sessionid') > 0)
+    {
+
+        Swal.fire('Please wait');
+        Swal.showLoading();
+
+
+
+
+        selected = $("#multi_mac").multi_select("getSelectedValues");
+        let selectedStr = JSON.stringify({selected});
+        //$('.data-display').remove();
+
+        groupID = $("#groups").multi_select("getSelectedValues");
+
+
+        let files = $("#id_file")[0].files[0];
+
+        let filename = "";
+        if (files !== undefined){
+            filename = files["name"];
+        }
+
+        console.log(files);
+        console.log(filename);
+
+
+            if (filename ===  ""){
+                firmware = $("#multi_firmware").multi_select("getSelectedValues");
+                console.log(firmware);
+
+                if (firmware.length === 0 ){
+                     Swal.fire({
+                        type: 'error',
+                        title: 'Either select a \'firmware\' from list or upload a new one',
+                    });
+
+                }else if (firmware.length > 1) {
+                     Swal.fire({
+                        type: 'error',
+                        title: "Uploading more than one firmware at a time not allowed",
+                    });
+
+
+                }
+
+                else{
+
+                    if (($("#users").val()) ===  null || (selected.length === 0)){
+                         Swal.fire({
+                            type: 'error',
+                            title: 'Platform Type and Mac Address must be selected',
+                            })
+                    }else{
+
+                         $.ajax({
+                            type : "POST",
+                            url:"{% url 'upload' %}",
+                            data : {
+                                "platformType": $("#users").val(),
+                                "macList" : selectedStr,
+                                "filename" : firmware[0],
+                                "newFile": "false"
+                            },
+                            csrfmiddlewaretoken: "{{ csrf_token }}",
+
+
+                            success:function () {
+                                console.log(firmware[0]);
+                                console.log(firmware);
+                                var msg = "Firmware,'" + firmware[0] + "' successfully added";
+
+                                    Swal.fire({
+                                        title:msg,
+                                        type:'success',
+                                        showCloseButton: true,
+                                    }).then((result) => {
+                                                  $('#renew').trigger('click');
+                                    });
+
+                            },
+                            error:function () {
+                                var msg = "Failed adding firmware '" + firmware[0] ;
+                                Swal.fire({
+                                    title:msg,
+                                    type:'error',
+                                }).then((result) => {
+                                    window.location.href = "";
+                                });
+                            }
+
+
+                        });
+
+                    }
+                }
+            }else{
+                var data = new FormData($('#fileForm').get(0));
+                data.append("file",$("#id_file")[0].files);
+                if ($("#users").val() === null){
+                    Swal.fire({
+                        type: 'error',
+                        title: 'Platform Type must be selected',
+                    })
+                }else{
+                    platformType = $("#users").val();
+                    //default firmware
+                    if(selected.length === 0){
+                        Swal.fire({
+                          title: 'MAC Address Not Selected!',
+                          text: 'It will be added as a Default Firmware , Are you sure?',
+                          type: 'warning',
+                          showCancelButton: true,
+                          confirmButtonColor: '#2c829c',
+                          cancelButtonColor: '#d33',
+                          confirmButtonText: 'Yes, add it!'
+                    }).then((result) => {
+                        if (result.value) {
+                            Swal.fire('Please wait');
+                            Swal.showLoading();
+
+                        $.ajax({
+                            type : "POST",
+                            url:"{% url 'upload_default' %}",
+                            data : data,
+                            csrfmiddlewaretoken: "{{ csrf_token }}",
+                            processData: false,
+                            contentType: false,
+                            success:function () {
+                                $.ajax({
+                                type : "POST",
+                                url:"{% url 'upload_default' %}",
+                                data : {
+                                    "platformType": platformType,
+                                    "filename" : filename,
+                                },
+                                csrfmiddlewaretoken: "{{ csrf_token }}",
+                                    success:function () {
+                                        var msg = "Default firmware '" + filename + "' added to platform '"+ platformType + "'";
+                                        Swal.fire({
+                                            title:msg,
+                                            type:'success',
+                                            showCloseButton: true,
+                                        }).then((result) => {
+                                        });
+
+                                    },
+                                    error:function () {
+                                        var msg = "Failed adding firmware '" + filename + "' to platform '"+ platformType + "'";
+                                        Swal.fire({
+                                        type: 'error',
+                                         title: msg,
+                                        }).then((result) => {
+                                            window.location.href = '';
+                                        })
+                                    }
+                                });
+                            },
+                             error:function () {
+                                 Swal.fire({
+                                     type: 'error',
+                                     title: "Error sending firmware",
+                                 }).then((result) => {
+                                            window.location.href = '';
+                                 })
+                             }
+                     });
+
+
+                   }
+                        else{
+                    console.log('Cancelled');}})}
+
+                    else{
+                        //normal firmware
+                        $.ajax({
+                            type : "POST",
+                            url:"{% url 'upload' %}",
+                            data : data,
+                            processData: false,
+                            contentType: false,
+                            success:function () {
+
+                                $.ajax({
+                                type : "POST",
+                                url:"{% url 'upload' %}",
+                                data : {
+                                    "platformType": $("#users").val(),
+                                    "macList" : selectedStr,
+                                    "filename" : filename,
+                                    "newFile" : "true",
+                                    "GroupID": groupID[0],
+                                },
+                                csrfmiddlewaretoken: "{{ csrf_token }}",
+                                success:function (response) {
+                                        firmwareNameWithVersion = filename;
+                                        // check if django returned the versioned firmware name
+                                        if (response.hasOwnProperty("versionedFirmware")){
+                                            firmwareNameWithVersion = response["versionedFirmware"];
+                                        }
+
+                                        var msg = "Firmware '" + firmwareNameWithVersion + "' successfully added";
+                                        Swal.fire({
+                                            title:msg,
+                                            type:'success',
+                                        }).then((result) => {
+                                                  $('#renew').trigger('click');
+                                        });
+                                    },
+                                error:function (response) {
+                                    // get the response containing necessary fields
+                                    responseJSON = response.responseJSON;
+                                    firmwareNameWithVersion = filename;
+                                    // check if django returned the versioned firmware name
+                                    if (responseJSON.hasOwnProperty("versionedFirmware")){
+                                        firmwareNameWithVersion = responseJSON["versionedFirmware"];
+                                    }
+                                    var msg = "Failed adding firmware '" + firmwareNameWithVersion ;
+                                    Swal.fire({
+                                        title:msg ,
+                                        type:'error',
+                                        text:'Firmware name must ends with "cloud-daemon" or "controller" !'
+
+                                    }).then((result) => {
+                                        window.location.href = '';
+                                    });
+                                }
+                                });
+                            },
+                            error:function () {
+                                 Swal.fire({
+                                     type: 'error',
+                                     title: "Error sending firmware!",
+                                 }).then((result) => {
+                                            window.location.href = '';
+                                 })
+                             }
+                        });
+                    }
+                }
+        }
+            }
+        else
+        {
+           Swal.fire({
+                type: 'error',
+                title: 'LOGIN EXPIRE!',
+                text: 'Your request could not send!',
+
+            }).then((result) => {
+              window.location.href = '/loginpage';
+                         })
+        }
+    });
+    $('#clear_values').on('click', function(event) {
+        $('#multi_mac').multi_select('clearValues');
+        $('#multi_firmware').multi_select('clearValues');
+        $('#users').val("").trigger("change");
+
+        $('#firmware_table').html("<center><b>This MAC Address has these firmwares:</b></center>");
+        $('#default_firmware_table').html("<center><b>Default Firmwares:</b></center>");
+
+
+        $('.data-display').slideUp(300, function() {
+        $(this).remove();
+        })
+    });
+
+    /* show firmwares with respect to mac address */
+    $('#multi_mac').on('click',function (event) {
+        event.preventDefault();
+        var macs = $(this).multi_select("getSelectedValues");
+        var data = {macs};
+
+        if (macs.length === 0){
+            var row = "<center><b>Select 'single' Mac Address in order to show firmwares !</b></center>";
+            $('#firmware_table').html(row);
+        }else if(macs.length > 1){
+           var row = "<center><b>Select one MAC Address to show firmwares belong that</b></center>";
+           $('#firmware_table').html(row);
+        }else{
+            $.ajax({
+            type : 'POST',
+            url :  "{% url 'get_firmware_info' %}",
+            data : data,
+            csrfmiddlewaretoken: "{{ csrf_token }}",
+
+            success : function(response) {
+                var firms = [];
+                var situation = [];
+                var statustime = [];
+                var md5info = [];
+                for(item of response.firmwares){
+                  firms +="<br><a style='padding-top:5px;padding-bottom:5px;padding-right:8px;padding-left:8px;'>" + item.Firmware +"</a>";
+                }
+
+                for(item of response.md5Info)
+                {
+                    md5info +="<br><a style='padding-top:5px;padding-bottom:5px;padding-right:1px;padding-left:1px;'>" + item.md5sum +"</a>";
+
+                }
+
+
+                for(item of response.Situation){
+                    if(item.Situation == 'Running') {
+                        situation += "<br><a style='padding-top:5px;padding-bottom:5px'>" + item.Situation + "</a>" + "&#10003;";
+                    }
+                    else if(item.Situation == 'empty')
+                    {
+                         situation += "<br><a style='padding-top:5px;padding-bottom:5px'>" + "N/A" +  "</a>" + "&nbsp;" + "&#10061;";
+                    }
+                    else if(item.Situation == undefined)
+                    {
+                        situation += "<br><a style='padding-top:5px;padding-bottom:5px'>" + item.Situation + "</a>" + "&#10067;";
+                    }
+                    else
+                    {
+                        situation += "<br><a style='padding-top:5px;padding-bottom:5px'>" + item.Situation + "</a>" + "&#10060;";
+                    }
+                }
+                for(item of response.StatusTime){
+                   var d = Date(item.StatusTime);
+                   statustime +="<br><a style='padding-top:5px'><b>" + d.substr(0,25) + "</b></a>";
+
+                }
+
+                $('#firmware_table').html("\n" +
+                    "        <table class=wrap-input100 col-lg-12; style=\"font-family: arial, sans-serif;\n" +
+                    "  border-collapse: collapse;\n" +
+                    "list-style:none;\" id=\"firmware_table\">\n" +
+                    "                  <tr class=wrap-input100;>" +
+                    "    <th style=\"border: 1px solid #dddddd;" +
+                    "  text-align: center;\n" +
+                    " \">Firmware</th>" +
+                    "    <th style=\"border: 1px solid #dddddd;\n" +
+                    "  text-align: center;\n" +
+                    " \">Status</th>" +
+                    "    <th style=\"border: 1px solid #dddddd;\n" +
+                    "  text-align: center;\n" +
+                    " \">Status Time</th>\n" +
+                    "    <th style=\"padding-right:1px;padding-left:1px;border: 1px solid #dddddd;\n" +
+                    "  text-align: center;\n" +
+                    " \">md5 Info</th>\n" +
+                    "  </tr>\n" +
+                     "   <tr style=\"\">\n" +
+                    "    <td style=\"border: 1px solid #dddddd;\n" +
+                    "text-align: center;\">" + "<b>" + firms + " </b>" + "</td>" +
+                    "    <td style=\"border: 1px solid #dddddd;" +
+                    "  text-align: center;" +
+                    " \">" + "<b>" + situation + "</b>" + " </td>\n" +
+                    "    <td style=\"border: 1px solid #dddddd;\n" +
+                    "  text-align: center;\n" +
+                    "; \">" +  statustime + "</td>\n" +
+                    "    <td style=\"padding-right:1px;padding-left:1px;border: 1px solid #dddddd;\n" +
+                    "  text-align: center;\n" +
+                    ";  \">" + "<b>" + md5info + "</b>" + "</td>\n" +
+                    "  </tr>\n" +
+                    "</table>\n");
+                $("#renew").html('<button type="button" class="btn btn-default btn-sm">\n' +
+                '          <span class="fa fa-refresh"></span> Refresh\n' +
+                '        </button>');
+                },
+             error: function () {
+                 Swal.fire({
+                                    type: 'error',
+                                     title: 'Something went wrong!',
+                                    }).then((result) => {
+                                        window.location.href = '';
+                                    })
+             }   
+            })
+        }
+    });
+
+
+
+  $('#renew').on('click',function (event) {
+        event.preventDefault();
+        var macs = $('#multi_mac').multi_select("getSelectedValues");
+        var data = {macs};
+        if (macs.length === 0){
+            var row = "<center><b>Select 'single' Mac Address in order to show firmwares !</b></center>";
+            $('#firmware_table').html(row);
+        }else if(macs.length > 1){
+           var row = "<center><b>Select one MAC Address to show firmwares belong that</b></center>";
+           $('#firmware_table').html(row);
+        }else{
+            $.ajax({
+            type : 'POST',
+            url :  "{% url 'get_firmware_info' %}",
+            data : data,
+            csrfmiddlewaretoken: "{{ csrf_token }}",
+
+            success : function(response) {
+                var firms = [];
+                var situation = [];
+                var statustime = [];
+                var md5info = [];
+                for(item of response.firmwares){
+                  firms +="<br><a style='padding-top:5px;padding-bottom:5px;padding-right:8px;padding-left:8px;'>" + item.Firmware +"</a>";
+                }
+
+                for(item of response.md5Info)
+                {
+                    md5info +="<br><a style='padding-top:5px;padding-bottom:5px;padding-right:1px;padding-left:1px;'>" + item.md5sum +"</a>";
+
+                }
+
+
+                for(item of response.Situation){
+                    if(item.Situation == 'Running') {
+                        situation += "<br><a style='padding-top:5px;padding-bottom:5px'>" + item.Situation + "</a>" + "&#10003;";
+                    }
+                    else if(item.Situation == 'empty')
+                    {
+                         situation += "<br><a style='padding-top:5px;padding-bottom:5px'>" + item.Situation + "</a>" + "&#10061;";
+                    }
+                    else if(item.Situation == undefined)
+                    {
+                        situation += "<br><a style='padding-top:5px;padding-bottom:5px'>" + item.Situation + "</a>" + "&#10067;";
+                    }
+                    else
+                    {
+                        situation += "<br><a style='padding-top:5px;padding-bottom:5px'>" + item.Situation + "</a>" + "&#10060;";
+                    }
+                }
+                for(item of response.StatusTime){
+                   var d = Date(item.StatusTime);
+                   statustime +="<br><a style='padding-top:5px'><b>" + d.substr(0,25) + "</b></a>";
+
+                }
+
+                $('#firmware_table').html("\n" +
+                    "        <table class=wrap-input100 col-lg-12; style=\"font-family: arial, sans-serif;\n" +
+                    "  border-collapse: collapse;\n" +
+                    "list-style:none;\" id=\"firmware_table\">\n" +
+                    "                  <tr class=wrap-input100;>" +
+                    "    <th style=\"border: 1px solid #dddddd;" +
+                    "  text-align: center;\n" +
+                    " \">Firmware</th>" +
+                    "    <th style=\"border: 1px solid #dddddd;\n" +
+                    "  text-align: center;\n" +
+                    " \">Status</th>" +
+                    "    <th style=\"border: 1px solid #dddddd;\n" +
+                    "  text-align: center;\n" +
+                    " \">Status Time</th>\n" +
+                    "    <th style=\"padding-right:1px;padding-left:1px;border: 1px solid #dddddd;\n" +
+                    "  text-align: center;\n" +
+                    " \">md5 Info</th>\n" +
+                    "  </tr>\n" +
+                     "   <tr style=\"\">\n" +
+                    "    <td style=\"border: 1px solid #dddddd;\n" +
+                    "text-align: center;\">" + "<b>" + firms + " </b>" + "</td>" +
+                    "    <td style=\"border: 1px solid #dddddd;" +
+                    "  text-align: center;" +
+                    " \">" + "<b>" + situation + "</b>" + " </td>\n" +
+                    "    <td style=\"border: 1px solid #dddddd;\n" +
+                    "  text-align: center;\n" +
+                    "; \">" +  statustime + "</td>\n" +
+                    "    <td style=\"padding-right:1px;padding-left:1px;border: 1px solid #dddddd;\n" +
+                    "  text-align: center;\n" +
+                    ";  \">" + "<b>" + md5info + "</b>" + "</td>\n" +
+                    "  </tr>\n" +
+                    "</table>\n");
+                },
+             error: function () {
+                 Swal.fire({
+                                    type: 'error',
+                                     title: 'Something went wrong!',
+                                    }).then((result) => {
+                                        window.location.href = '';
+                                    })
+             }
+            })
+        }
+    });
+
+
+
+    /* show macs with respect to group ids */
+     $('#groups').on('click',function () {
+          var groups = $(this).multi_select("getSelectedValues");
+          var data = {groups};
+
+
+
+          $.ajax({
+            type : 'POST',
+            url :  "{% url 'get_group_info' %}",
+            data : data,
+            csrfmiddlewaretoken: "{{ csrf_token }}",
+
+               success : function(response) {
+                    console.log('heloo');
+                    macJson = {};
+                    for(item of response.macs)
+                    {
+                        macs = item.MacAddr;
+                        macJson[macs] = macs;
+                    }
+
+
+                         // show macs with respect to group id
+                    $("#multi_mac").multi_select({
+                    data : macJson,
+
+                })
+                    },
+                 error: function () {
+                    console.log('aaaada')
+                 }
+
+
+
+          })
+
+
+      });
+
+
+
+    /*  when platform type changed */
+    var selected = [];
+    $("#users").change(function(e){
+        e.preventDefault();
+        var platformType = $(this).val();
+        var data = {platformType};
+
+        $.ajax({
+            type : 'POST',
+            url :  "{% url 'get_mac_info' %}",
+            data : data,
+            csrfmiddlewaretoken: "{{ csrf_token }}",
+
+            success : function(response) {
+
+                groupJson = {};
+                for (item of response.groupNumbers) {
+                    group = item.GroupID;
+                    groupJson[group] = group;
+                    console.log(groupJson[group]);
+                }
+
+                macJson = {};
+                for (item of response.macAddresses) {
+                    mac = item.MacAddr;
+                    macJson[mac] = mac;
+                }
+
+                firmwareJson = {};
+                for (item of response.firmwares) {
+                    firmware = item.Firmware;
+                    firmwareJson[firmware] = firmware;
+                }
+
+
+                // get default firmware with respect to platform type
+                if (response.default_firmwares.default !== null) {
+                    deffirm = []
+                    for (item of response.default_firmwares.default) {
+                        deffirm += "<center><a style='font-family: Arial, sans-serif'>" + item + "</a></center>";
+                    }
+                    $('#default_firmware_table').html("<center><b> Default Firmwares of this Platform ID: </b></center>" + deffirm);
+                } else {
+                    row += "<center><b>This Platform Type has no default firmware !</b></center>";
+                    $('#default_firmware_table').html(row);
+                }
+
+                // show group numbers according to platform type
+                $("#groups").multi_select({
+                    data: groupJson,
+                });
+
+
+                // show mac adresses with respect to platform type
+                $("#multi_mac").multi_select({
+                    data: macJson,
+                });
+
+                // show firmwares with respect to platform type
+                $("#multi_firmware").multi_select({
+                    data: firmwareJson,
+
+                })
+            },
+            error : function(response){
+                console.log(response)
+            }
+        });
+
+    })
+})
+</script>
+{% endblock %}
+
+

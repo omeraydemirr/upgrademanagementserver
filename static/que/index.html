@@ -1,0 +1,112 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>jQuery Multi Select: Dynamic Multi-select Dropdown Demo</title>
+<link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+<link href="css/multi.select.css" rel="stylesheet" type="text/css">
+<style>
+
+.multi-button {
+  width: 60% !important;
+}
+body {
+  font-family: "Open sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  background-color: #fafafa;
+}
+
+.wrapper {
+  float: left;
+  width: 100%;
+  margin: 20px 0
+}
+.container { margin:150px auto; max-width:768px;}
+</style>
+</head>
+
+<body>
+<div id="jquery-script-menu">
+<div class="jquery-script-center">
+<ul>
+<li><a href="https://www.jqueryscript.net/form/Dynamic-Multi-Select-Plugin-jQuery.html">Download This Plugin</a></li>
+<li><a href="https://www.jqueryscript.net/">Back To jQueryScript.Net</a></li>
+</ul>
+<div class="jquery-script-ads"><script type="text/javascript"><!--
+google_ad_client = "ca-pub-2783044520727903";
+/* jQuery_demo */
+google_ad_slot = "2780937993";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="https://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script></div>
+<div class="jquery-script-clear"></div>
+</div>
+</div>
+<div class="container">
+<h1>jQuery Multi Select: Dynamic Multi-select Dropdown Demo</h1>
+<div class="multi" id="multi"></div>
+    <div class="wrapper">
+        <div style="display: inline-block;">
+            <div class="button button-small button-green fill test-values" id="get_values">Get Selected Values &#8601;</div>
+        </div>
+        <div style="display: inline-block;">
+            <div class="button button-small button-red fill test-values" id="clear_values">Clear Selected Values &#8635;</div>
+        </div>
+    </div>
+    </div>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+<script src="js/multi.select.js"></script>
+<script>
+$('.multi').multi_select({
+  selectColor: 'purple',
+  selectSize: 'small',
+  selectText: 'Select Project',
+  duration: 300,
+  easing: 'slide',
+  listMaxHeight: 300,
+  selectedCount: 2,
+  sortByText: true,
+  fillButton: true,
+  data: {
+    "BD": "Bangladesh",
+    "BE": "Belgium",
+    "BF": "Burkina Faso",
+    "BG": "Bulgaria",
+    "BA": "Bosnia and Herzegovina",
+    "BB": "Barbados",
+    "WF": "Wallis and Futuna",
+    "BL": "Saint Barthelemy",
+    "BM": "Bermuda",
+  },
+  onSelect: function(values) {
+    console.log('return values: ', values);
+  }
+  });
+  $('#get_values').on('click', function(event) {
+            console.log($('#multi').multi_select('getSelectedValues'));
+    $('.data-display').remove();
+    var json = { items: $('#multi').multi_select('getSelectedValues') };
+    if (json.items.length) {
+      var ul = $('<ul>', { 'class': 'data-display' }).appendTo('body');
+      $(json.items).each(function(index, item) {
+        ul.append(
+          '<li style="display: block;">' + item + '</li>'
+        );
+      });
+    }
+  })
+$('#clear_values').on('click', function(event) {
+  $('#multi').multi_select('clearValues');
+  $('.data-display').slideUp(300, function() {
+    $(this).remove()
+  })
+})
+</script>
+
+</body>
+</html>

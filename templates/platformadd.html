@@ -1,0 +1,208 @@
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Add Platform Type</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->
+	<link rel="icon" type="image/png" href="/static/form/images/icons/bla.ico"/>
+
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href= {% static "form/vendor/bootstrap/css/bootstrap.min.css" %}>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href={% static "form/fonts/font-awesome-4.7.0/css/font-awesome.min.css"%}>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href={% static "form/fonts/iconic/css/material-design-iconic-font.min.css"%}>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href={% static "form/vendor/animate/animate.css" %}>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href={% static "form/vendor/css-hamburgers/hamburgers.min.css" %}>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href={% static "form/vendor/animsition/css/animsition.min.css"%}>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href={% static "form/vendor/select2/select2.min.css"%}>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href={% static "form/vendor/daterangepicker/daterangepicker.css"%}>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href={% static "form/vendor/noui/nouislider.min.css"%}>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href={% static "form/css/util.css"%}>
+	<link rel="stylesheet" type="text/css" href={% static "form/css/main.css"%}>
+<!--===============================================================================================-->
+    <!-- owl carousel css-->
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href={% static "form/css/solution/css/bootstrap.min.css"%}>
+    <!-- custom CSS -->
+    <link rel="stylesheet" href={% static "form/css/solution/css/style.css" %}>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light" id="gtco-main-nav">
+    <div class="container"><a href="/"><img src="https://static.wixstatic.com/media/6b3509_3a379fb7ab874f9789302e7c45ce40b6~mv2_d_4434_1692_s_2.png/v1/fill/w_199,h_76,al_c,q_80,usm_0.66_1.00_0.01/6b3509_3a379fb7ab874f9789302e7c45ce40b6~mv2_d_4434_1692_s_2.webp"></a>
+        <button class="navbar-toggler" data-target="#my-nav" onclick="" data-toggle="collapse"><span
+                class="bar1"></span> <span class="bar2"></span> <span class="bar3"></span></button>
+        <div id="my-nav" class="collapse navbar-collapse">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item"><a class="nav-link" href="cloud/upload"><div class="box"><b>Upload Form</b></div></a></li>
+                <li class="nav-item"><a class="nav-link" href="/macadress"><div class="box"><b>Add MacAddress</b></div></a></li>
+
+
+                                           <li class="nav-item"><a class="nav-link" href="/loglist"><div class="box"><b>List</b></div></a></li>
+
+                <li class="nav-item"><a class="nav-link" href=""><div class="box">Add Platform</div></a></li>
+
+                <li class="nav-item"><a class="nav-link" href="/deletefirmware"><div class="box"><b>Delete Firmware</b></div></a></li>
+
+                    <li class="nav-item"><a class="nav-link" href="/platformdelete"><div class="box"><b>Delete Platform-Mac</b></div></a></li>
+            </ul>
+
+        </div>
+    </div>
+</nav>
+
+<div class="container-contact100" style="">
+    <div class="wrap-contact100 col-lg-7" style="max-width: 900px;margin-bottom:100px">
+
+				<span class="contact100-form-title">
+					Platform or Mac Address Adding
+				</span>
+<!-- "Show" button -->
+
+
+<center><button id="show1">*READ HOW TO USE FORM</button></center>
+        <dialog class="wrap-contact100 col-lg-10" style="display: none; width:auto;height:auto;position:relative;padding-top:14px;padding-bottom: 14px;margin:0 auto" id="dialog1">
+            <p><li style="list-style-type: square"><font size="4px"> In order to send form correctly , first of all <b>Platform Type</b> must be written from first label.</font></li> </p>
+<p><li style="list-style-type: square"><font size="4px"> If its written , <b>Mac Addresss</b> must be written which will add to written Platform Type.</font></li> </p>
+            <p><li style="list-style-type: square"><font size="4px">After the <b>Platform Type</b>  and <b>Mac Addresss</b> is written, <b>Send Values</b> button must be clicked. </font></li> </p>
+            <center> <p><q><font size="4px">If form failed to send , altough both values were filled or desired value isnt exists , you should contact with <b>Adminastrator</b> . </font></q></p></center>
+
+
+<center><button id="hide1" ><u>Close</u></button></center>
+</dialog>
+
+<br>
+
+
+
+
+
+        <form enctype="multipart/form-data" method="POST">
+{% csrf_token %}
+
+    <div class="wrap-input100 validate-input bg1 col-lg-10" style="margin:0 auto;padding-bottom:0" >
+    {{ form.PlatformType|as_crispy_field }}
+
+
+
+    </div>
+
+<br>
+    <div class="wrap-input100 validate-input bg1 col-lg-10" style="margin:0 auto;padding-bottom:0;" >
+    {{ form.GroupID|as_crispy_field }}
+    </div>
+
+<br>
+
+
+
+    <div class="wrap-input100 validate-input bg1 col-lg-10" style="margin:0 auto;padding-bottom:0;" >
+    {{ form.MacAddr|as_crispy_field }}
+    </div>
+
+<hr>
+
+				<div  class="container-contact100-form-btn">
+
+					<button class="button button-small button-red fill test-values contact100-form-btn col-lg-7" style="background-color:#183B4E; margin:0 auto;" id="sendPlatform">
+
+<b>Send Values</b>							<i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
+
+					</button>
+
+
+
+</div>
+
+
+			</form>
+
+
+
+		</div>
+	</div>
+
+
+
+
+<footer class="card-footer" style="background-image: linear-gradient(450deg, #2c829c, #244f6c);bottom: 0; padding: 8px; width: 100%; position: fixed; text-align: center; left: 0;z-index:1000">
+    <div><a style="font-family:Lato-Bold;color: white;">Version: 0.1.2</a></div>
+    <div style="font-family:Lato-Bold;color: white"><i class="fa fa-copyright fa-fw"></i>2019 by <a href="https://www.bla-bla.com/" target="_blank" style="font-family:Lato-Bold;color: white; font-size: 17px">bla-bla</a></div>
+</footer>
+
+
+
+
+</body>
+</html>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+  <script type="text/javaScript">
+    (function() {
+        var dialog1 = document.getElementById('dialog1');
+        document.getElementById('show1').onclick = function() {
+        document.getElementById('dialog1').style.display = 'block';
+    };
+        document.getElementById('hide1').onclick = function() {
+        document.getElementById('dialog1').style.display = 'none';
+    };
+})();
+</script>
+
+<script type="text/javascript">
+
+         $('#sendPlatform').on('click', function () {
+             if (document.cookie.indexOf('sessionid') < 0) {
+                 Swal.fire({
+                     type: 'error',
+                     title: 'LOGIN EXPIRE!',
+                     text: 'Your request could not send!'
+                 }).then((result) => {
+                     window.location.href = '/loginpage';
+                 })
+             }
+
+
+         });
+
+</script>
+
+
+
+
+
+
+
+
+<script src="https://code.jquery.com/jquery-3.1.1.js"></script>
+
+<script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src={% static "form/vendor/jquery/jquery-3.2.1.min.js"%}></script>
+<!--===============================================================================================-->
+	<script src={% static "form/vendor/animsition/js/animsition.min.js"%}></script>
+<!--===============================================================================================-->
+	<script src={% static "form/vendor/bootstrap/js/popper.js" %}></script>
+	<script src={% static "form/vendor/bootstrap/js/bootstrap.min.js"%}></script>
+<!--===============================================================================================-->
+	<script src={% static "form/vendor/select2/select2.min.js" %}></script>
+<!--===============================================================================================-->
+	<script src={% static "form/vendor/daterangepicker/moment.min.js"%}></script>
+	<script src={% static "form/vendor/daterangepicker/daterangepicker.js"%}></script>
+<!--===============================================================================================-->
+	<script src={% static "form/vendor/countdowntime/countdowntime.js"%}></script>
+<!--===============================================================================================-->
+	<script src={% static "form/vendor/noui/nouislider.min.js"%}></script>

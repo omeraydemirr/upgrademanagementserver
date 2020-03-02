@@ -1,0 +1,313 @@
+// mixin
+.vh() {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+.position-center-vertical {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+}
+
+// custom checkbox/radios
+@inputHeight: 14px;
+@inputWidth: 14px;
+@inputBorderWidth: 2px;
+@inputActiveScale: 4px; // optimized for even numbers
+
+@checkboxColor: #4F8196;
+@checkboxDisabledColor: #cccccc;
+
+@toggleInputWidth: 35px;
+@toggleInputHeight: 20px;
+@toggleBGColor: #d6d6d6;
+@toggleBGColorDisabled: lighten(@toggleBGColor, 5%);
+@toggleBGColorActive: @checkboxColor;
+@toggleBGColorActiveDisabled: lighten(desaturate(@toggleBGColorActive, 50%), 15%);
+@toggleHandleColor: #ffffff;
+@toggleHandleColorActive: #ffffff;
+
+.pure-checkbox,
+.pure-radiobutton {
+
+  * {
+    box-sizing: border-box;
+  }
+  *:before,
+  *:after {
+    box-sizing: border-box;
+  }
+
+  input[type="checkbox"],
+  input[type="radio"] {
+    .vh();
+
+    &:focus,
+    &:hover {
+      + label {
+        &:before {
+          border-color: @checkboxColor;
+          background-color: lighten(@checkboxDisabledColor, 15%);
+        }
+      }
+    }
+
+    &:active {
+      + label {
+        &:before {
+          transition-duration: 0s;
+        }
+      }
+
+    }
+
+    + label {
+      position: relative;
+      padding: 5px 5px 5px 2em;
+      vertical-align: middle;
+      user-select: none;
+      cursor: pointer;
+
+      &:before {
+        box-sizing: content-box;
+        content: '';
+        color: @checkboxColor;
+        position: absolute;
+        top: 50%;
+        left: 0;
+        width: @inputWidth;
+        height: @inputHeight;
+        margin-top: -(@inputHeight/2 + @inputBorderWidth);
+        border: @inputBorderWidth solid @checkboxColor;
+        //font-size: 18px;
+        text-align: center;
+        transition: all 0.4s ease;
+      }
+      &:after {
+        box-sizing: content-box;
+        content: '';
+        background-color: @checkboxColor;
+        position: absolute;
+        top: 50%;
+        left: @inputBorderWidth + @inputActiveScale/2;
+        width: @inputWidth - @inputActiveScale;
+        height: @inputHeight - @inputActiveScale;
+        margin-top: -((@inputHeight - @inputActiveScale)/2);
+        transform: scale(0);
+        transform-origin: 50%;
+        transition: transform 200ms ease-out;
+      }
+    }
+
+    &:disabled {
+
+      + label {
+        &:before {
+          border-color: @checkboxDisabledColor;
+        }
+      }
+
+      &:focus,
+      &:hover {
+        + label {
+          &:before {
+            background-color: inherit;
+          }
+        }
+      }
+
+      &:checked {
+        + label {
+          &:before {
+            background-color: @checkboxDisabledColor;
+          }
+        }
+      }
+    }
+  }
+
+  input[type="checkbox"] {
+    + label {
+      &:after {
+        background-color: transparent;
+        top: 50%;
+        left: 4px;
+        width: 8px;
+        height: 3px;
+        margin-top: -4px;
+        border-style: solid;
+        border-color: #ffffff;
+        border-width: 0 0 3px 3px;
+        border-image: none;
+        transform: rotate(-45deg) scale(0);
+      }
+    }
+    &:checked {
+
+      + label {
+        &:after {
+          content: ''; //\2713';
+          transform: rotate(-45deg) scale(1);
+          transition: transform 200ms ease-out;
+        }
+      }
+
+    }
+  }
+
+  input[type="radio"] {
+    &:checked {
+      + label {
+        &:before {
+          animation: borderscale 300ms ease-in;
+          background-color: white;
+        }
+        &:after {
+          transform: scale(1);
+        }
+      }
+    }
+    + label {
+      &:before,
+      &:after {
+        border-radius: 50%;
+      }
+    }
+  }
+
+  input[type="checkbox"] {
+    &:checked {
+      + label {
+        &:before {
+          animation: borderscale 200ms ease-in;
+          background: @checkboxColor;
+        }
+        &:after {
+          transform: rotate(-45deg) scale(1);
+        }
+      }
+    }
+  }
+
+  &.pure-checkbox-inline, &.pure-radiobutton-inline {
+    display: inline-block;
+  }
+}
+
+.pure-checkbox-toggle {
+  input[type="checkbox"] {
+    .vh();
+
+    + label {
+      position: relative;
+      padding: 5px 5px 5px (5px + @toggleInputWidth);
+      vertical-align: middle;
+      user-select: none;
+      cursor: pointer;
+      display: block;
+
+      &:before {
+        .position-center-vertical;
+        left: 0;
+        content: '';
+        color: @checkboxColor;
+        width: @toggleInputWidth;
+        height: @toggleInputHeight;
+        border-radius: 50px;
+        text-align: center;
+        transition: all 0.4s;
+        background-color: @toggleBGColor;
+      }
+      &:after {
+        .position-center-vertical;
+        left: 0;
+        content: '';
+        background-color: @toggleHandleColor;
+        width: @toggleInputHeight;
+        height: @toggleInputHeight;
+        border-radius: 50%;
+        border: 1px solid @toggleBGColor;
+        transition: all 0.2s;
+        box-sizing: border-box;
+      }
+    }
+
+    &:checked {
+      + label {
+        &:before {
+          box-shadow: inset 0 0 0 10px @toggleBGColorActive;
+        }
+        &:after {
+          left: @toggleInputWidth - @toggleInputHeight;
+          border-color: @toggleBGColorActive;
+          background-color: @toggleHandleColorActive;
+        }
+      }
+    }
+
+    &:disabled {
+      + label {
+        cursor: default;
+        &:before {
+          box-shadow: inset 0 0 0 10px @toggleBGColorDisabled;
+        }
+        &:after {
+          border-color: @toggleBGColorDisabled;
+        }
+      }
+      &:checked {
+        + label {
+          &:before {
+            box-shadow: inset 0 0 0 10px @toggleBGColorActiveDisabled;
+          }
+          &:after {
+            border-color: @toggleBGColorActiveDisabled;
+          }
+        }
+      }
+    }
+  }
+
+  &--right {
+    input[type="checkbox"] {
+      + label {
+        padding: 5px (5px + @toggleInputWidth) 5px 5px;
+
+        &:before {
+          left: auto;
+          right: 0;
+        }
+        &:after {
+          left: auto;
+          right: @toggleInputWidth - @toggleInputHeight;
+        }
+      }
+
+      &:checked {
+        + label {
+          &:after {
+            left: auto;
+            right: 0;
+          }
+        }
+      }
+    }
+  }
+}
+
+
+@keyframes borderscale {
+  50% {
+    box-shadow: 0 0 0 2px @checkboxColor;
+  }
+}

@@ -1,0 +1,483 @@
+{% extends "base.html" %}
+
+
+{% block head %}
+	<title>					Delete Platform-Mac
+</title>
+{% endblock %}
+{% block style %}
+
+
+
+{% endblock %}
+
+{% block content %}
+
+
+<head>
+
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href= "/static/form/vendor/bootstrap/css/bootstrap.min.css" >
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/static/form/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/static/form/fonts/iconic/css/material-design-iconic-font.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/static/form/vendor/animate/animate.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/static/form/vendor/css-hamburgers/hamburgers.min.css" >
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/static/form/vendor/animsition/css/animsition.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/static/form/vendor/select2/select2.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/static/form/vendor/daterangepicker/daterangepicker.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/static/form/vendor/noui/nouislider.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/static/form/css/util.css">
+	<link rel="stylesheet" type="text/css" href="/static/form/css/main.css">
+<!--===============================================================================================-->
+    <!-- owl carousel css-->
+    <link rel="stylesheet" href="/static/form/css/solution/owl-carousel/assets/owl.carousel.min.css" type="text/css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/static/form/css/solution/css/bootstrap.min.css">
+    <!-- custom CSS -->
+    <link rel="stylesheet" href="/static/form/css/solution/css/style.css" >
+</head>
+<nav class="navbar navbar-expand-lg navbar-light bg-light" id="gtco-main-nav">
+    <div class="container"><a href="/"><img src="https://static.wixstatic.com/media/6b3509_3a379fb7ab874f9789302e7c45ce40b6~mv2_d_4434_1692_s_2.png/v1/fill/w_199,h_76,al_c,q_80,usm_0.66_1.00_0.01/6b3509_3a379fb7ab874f9789302e7c45ce40b6~mv2_d_4434_1692_s_2.webp"></a>
+        <button class="navbar-toggler" data-target="#my-nav" onclick="" data-toggle="collapse"><span
+                class="bar1"></span> <span class="bar2"></span> <span class="bar3"></span></button>
+        <div id="my-nav" class="collapse navbar-collapse">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item"><a class="nav-link" href="cloud/upload"><div class="box"><b>Upload Form</b></div></a></li>
+   <li class="nav-item"><a class="nav-link" href="/macadress"><div class="box"><b>Add MacAddress</b></div></a></li>
+
+{% if sessionvalue == 'super' %}
+
+                                           <li class="nav-item"><a class="nav-link" href="/loglist"><div class="box"><b>List</b></div></a></li>
+
+                     <li class="nav-item"><a class="nav-link" href="/addplatform"><div class="box"><b>Add Platform</b></div></a></li>
+                <li class="nav-item"><a class="nav-link" href="/deletefirmware"><div class="box"><b>Delete Firmware</b></div></a></li>
+
+                    <li class="nav-item"><a class="nav-link" href=""><div class="box">Delete Platform-Mac</div></a></li>
+
+{% endif %}
+
+            </ul>
+
+        </div>
+    </div>
+</nav>
+
+<div class="container-contact100">
+    <div class="wrap-contact100" style="width: 1100px;margin-bottom: 100px">
+
+				<span class="contact100-form-title">
+					Platform or Mac Address Deleting
+				</span>
+
+        <!-- "Show" button -->
+
+
+<center><button id="show1">*READ HOW TO USE FORM</button></center>
+        <dialog class="wrap-contact100 col-lg-10" style="display: none; width:auto;height:auto;position:relative;padding-top:14px;padding-bottom: 14px;margin:0 auto" id="dialog1">
+            <p><li style="list-style-type: square"><font size="4px"> In order to send form correctly , first of all <b>Platform Type</b> must be choosen from drop-down list. </font></li> </p>
+            <p><li style="list-style-type: square"><font size="4px"> <b>WARNING:</b> When only <b>Platform Type</b> must be selected , If <b>Delete Platform/Mac</b> is clicked , that <b>Platform Type</b>
+        and all <b>Mac Addresses</b> which it have will be <b>DELETED!</b></font></li> </p>
+<p><li style="list-style-type: square"><font size="4px"> If its chosen , <u>single</u> or <u>multiple</u> <b>Mac Address</b> which desired to deleted would be selected.</font></li> </p>
+               <p><li style="list-style-type: square"><font size="4px">Also if <b>Mac Address</b> choosen <u>single</u> , <b>Firmwares</b> which it has will open in a list. </font></li> </p>
+            <p><li style="list-style-type: square"><font size="4px">Finally , after all steps <b>Delete Platform/Mac</b> button would be clicked.</font></li> </p>
+
+
+<br>
+<center><button id="hide1" ><u>Close</u></button></center>
+</dialog>
+
+<br>
+
+
+
+        <form id="dataForm" enctype="multipart/form-data" method="POST">
+
+
+
+       <div class="col-lg-5" style="float:left;margin-top: 30px" data-validate="">
+
+   <div class="form-horizontal col-lg-12">
+   	<select class="wrap-input100 button col-lg-12" style="margin-bottom:0;margin-top:0;text-align-last: center;" id = "users">
+        <option style="text-align-last: center;" selected="true" disabled="disabled">
+
+
+            Select Platform ID from Platform List </option>
+
+   		{% for item in platformTypes %}
+   			<option class="multi-button" style="text-align-last: center;" value = {{item.PlatformType}}>{{item.PlatformType}}</option>
+   		{% endfor %}
+
+   	</select>
+   </div>
+       <br><br>
+                  <ul class="" style="" id="groups"></ul>
+
+     </div>
+
+
+
+
+
+ <div class="wrap-input100 validate-input bg1 col-lg-6" style="float:right;height: 500px;margin-top: 30px">
+   <div class="wrap-input100 button col-lg-12" id="multi_mac"></div>
+
+          <ul class="wrap-contact100 bg-light" style="list-style:none; width: auto; height: auto; padding: 2px;" id="firmware_table">
+
+            <center><b>This MAC Address has these firmwares:</b></center>
+
+        </ul>
+
+          </div>
+
+
+
+
+
+
+
+        <div class="col-lg-12" style="float: left">
+
+
+                <div class="button button-small button-red fill test-values contact100-form-btn "  id="remove_files">Delete Platform/Mac <i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i></div>
+            <br>
+                <div class="button button-small button-red fill test-values contact100-form-btn " id="clear_values">Clear Selected Values &#8635;</div>
+
+                </div>
+        </form>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block script %}
+
+      <script type="text/javaScript">
+    (function() {
+        var dialog1 = document.getElementById('dialog1');
+        document.getElementById('show1').onclick = function() {
+        document.getElementById('dialog1').style.display = 'block';
+    };
+        document.getElementById('hide1').onclick = function() {
+        document.getElementById('dialog1').style.display = 'none';
+    };
+})();
+</script>
+
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+    <script src="/static/que/js/multi.select.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+
+    $('#multi_mac').multi_select({
+        selectColor: 'purple',
+        selectSize: 'medium',
+        duration: 300,
+        easing: 'slide',
+        listMaxHeight: 300,
+        selectedCount: 2,
+        sortByText: true,
+        fillButton: true,
+    });
+
+
+    $('#multi_mac').multi_select({
+        selectText: 'Choose MAC Addresses',
+    });
+
+    $('#groups').multi_select({
+        selectText: 'Choose Group ID',
+    });
+
+
+        $('#multi_mac').on('click',function (event) {
+        event.preventDefault();
+        var macs = $(this).multi_select("getSelectedValues");
+        var data = {macs};
+
+        if (macs.length === 0){
+            var row = "<center><b>This MAC Address has these firmwares:</b></center>";
+            $('#firmware_table').html(row);
+        }else if(macs.length > 1){
+           var row = "<center><b>Select one MAC Address to show firmwares belong that</b></center>";
+           $('#firmware_table').html(row);
+        }else{
+            $.ajax({
+            type : 'POST',
+            url :  "{% url 'get_firmware_info' %}",
+            data : data,
+            csrfmiddlewaretoken: "{{ csrf_token }}",
+
+            success : function(response) {
+                var row = "<center><b>This MAC Address has these firmwares:</b></center>";
+                for(item of response.firmwares){
+                    row += "<center><li>" + item.Firmware +"</li></center>";
+                }
+                $('#firmware_table').html(row);
+                },
+             error: function () {
+                 Swal.fire({
+                    type: 'error',
+                     title: 'Something went wrong!',
+                    }).then((result) => {
+                        window.location.href = '';
+                    })
+             }
+            })
+        }
+    });
+
+    $('#remove_files').on("click",function (event) {
+    if(document.cookie.indexOf('sessionid') > 0)
+    {
+
+            mac = $("#multi_mac").multi_select("getSelectedValues");
+
+
+            if (mac.length === 0)
+                mac = "";
+
+            platformType = $("#users").val();
+            if (platformType == null && mac === ''){
+                Swal.fire({
+                    type: 'error',
+                    title: 'Either select a Platform Type or a Mac Address',
+                                                });
+            }else{
+                Swal.fire({
+              title: 'Are you sure?',
+              text: 'Selected values will be deleted!',
+              type: 'warning',
+              showCancelButton: true,
+              confirmButtonColor: '#2c829c',
+              cancelButtonColor: '#d33',
+              confirmButtonText: 'Yes, delete!'
+        }).then((result) => {
+            if (result.value) {
+                Swal.fire('Please wait');
+                Swal.showLoading();
+                  $.ajax({
+                type : "POST",
+                url:"{% url 'delete_pmac' %}",
+                data : {
+                    "platformType": platformType,
+                    "mac" : JSON.stringify(mac),
+                },
+                csrfmiddlewaretoken: "{{ csrf_token }}",
+                success:function () {
+                    event.preventDefault();
+                    var msg;
+                    if (mac === ''){
+                        msg = "Platform Type '" + platformType + "' deleted";
+                    }else{
+                        msg = "Mac Address '" + JSON.stringify(mac) + "' deleted";
+                    }
+                    Swal.fire({
+                        title:msg,
+                        type:'success',
+                        showCloseButton: true,
+                        }).then((result) => {
+                        window.location.href = '';
+                        });
+                },
+                error:function () {
+                    var msg;
+                    if (mac === ''){
+                        msg = "Failed deleting Platform Type '" + platformType + "'";
+                        window.location.href = "";
+                    }else{
+                        msg = "Failed deleting mac address '" + JSON.stringify(mac) + "'";
+                        window.location.href = "";
+                    }
+                    Swal.fire({title:msg,
+                                type:'error',
+
+                                });
+                    window.location.href = "";
+
+                }
+                });
+            }
+            else{
+                console.log('Cancelled');
+            }
+         });
+        }
+
+    }
+    else
+    {
+        Swal.fire({
+            type: 'error',
+            title: 'LOGIN EXPIRE!',
+            text: 'Your request could not send!'
+        }).then((result) => {
+          window.location.href = '/loginpage';
+                     })
+    }
+
+    });
+
+
+    /*  clear the values lists show */
+    $('#clear_values').on('click', function(event) {
+        $('#multi_mac').multi_select('clearValues');
+        $('#multi_firmware').multi_select('clearValues');
+        $('#users').val("").trigger("change");
+
+        $('.data-display').slideUp(300, function() {
+        $(this).remove()
+        })
+    });
+
+        /* show macs with respect to group ids */
+     $('#groups').on('click',function () {
+          var groups = $(this).multi_select("getSelectedValues");
+          var data = {groups};
+
+            if (groups.length > 1)
+            {
+                $("#groups").multi_select("clearValues")
+                Swal.fire({
+                        type: 'error',
+                        title: 'Platform Type and Group ID must be selected SINGLE !',
+                    });
+
+            }
+
+          $.ajax({
+            type : 'POST',
+            url :  "{% url 'get_group_info' %}",
+            data : data,
+            csrfmiddlewaretoken: "{{ csrf_token }}",
+
+               success : function(response) {
+                    console.log('heloo');
+                    macJson = {};
+                    for(item of response.macs)
+                    {
+                        macs = item.MacAddr;
+                        macJson[macs] = macs;
+                    }
+
+
+                         // show macs with respect to group id
+                    $("#multi_mac").multi_select({
+                    data : macJson,
+
+                })
+                    },
+                 error: function () {
+                    console.log('aaaada')
+                 }
+
+
+
+          })
+
+
+      });
+
+
+
+
+
+
+
+    /* show firmwares with respect to mac address */
+    $('#multi_mac').on('click',function (event) {
+        event.preventDefault();
+        var macs = $(this).multi_select("getSelectedValues");
+        var data = {macs};
+
+        $.ajax({
+        type : 'POST',
+        url :  "{% url 'get_firmware_info' %}",
+        data : data,
+        csrfmiddlewaretoken: "{{ csrf_token }}",
+
+        success : function(response) {
+            var row = "";
+
+            firmwareJson = {};
+            for(item of response.firmwares){
+                firmware = item.Firmware;
+                firmwareJson[firmware] = firmware;
+            }
+
+            // show firmwares with respect to platform type
+            $("#multi_firmware").multi_select({
+                data : firmwareJson,
+            })
+        }
+        })
+    });
+
+    /*  when paltform type changed */
+    var selected = [];
+    $("#users").change(function(e){
+        e.preventDefault();
+        var platformType = $(this).val();
+        var data = {platformType};
+
+        $.ajax({
+            type : 'POST',
+            url :  "{% url 'get_mac_info' %}",
+            data : data,
+            csrfmiddlewaretoken: "{{ csrf_token }}",
+
+            success : function(response){
+            macJson = {};
+            for (item of response.macAddresses){
+                mac = item.MacAddr;
+                macJson[mac] = mac;
+            }
+
+            firmwareJson = {};
+            for(item of response.firmwares){
+                firmware = item.Firmware;
+                firmwareJson[firmware] = firmware;
+            }
+
+            groupJson = {};
+                for (item of response.groupNumbers) {
+                    group = item.GroupID;
+                    groupJson[group] = group;
+                }
+
+            $("#groups").multi_select({
+                data: groupJson,
+            });
+
+
+            // show mac adresses with respect to platform type
+            $("#multi_mac").multi_select({
+                data : macJson,
+            });
+
+            // show firmwares with respect to platform type
+            $("#multi_firmware").multi_select({
+                data : firmwareJson,
+            })
+            },
+            error : function(response){
+                console.log(response)
+            }
+        })
+    })
+
+})
+</script>
+{% endblock %}

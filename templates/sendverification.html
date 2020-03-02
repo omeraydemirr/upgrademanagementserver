@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+ <!-- SIGN UP - LOGIN HTML -->
+<head>
+    <title>bla bla | Send Verification</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://www.w3schools.com/w3css/4/w3.css" rel="stylesheet">
+    <link href="https://www.w3schools.com/lib/w3-theme-green.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-black.css">
+    	<link rel="icon" type="image/png" href="/static/form/images/icons/bla.ico"%}/>
+
+
+</head>
+<style>
+    html,h1,h2,h3,h4,h5 {font-family:"Raleway", sans-serif}
+    body {
+        background-color: #1f1f1f;
+        font-family: "Raleway";
+    }
+    .alert {
+        color:  #f44336;
+        opacity: 1;
+        transition: opacity 0.6s;
+        margin-bottom: 15px;
+    }
+
+    .alert.success { color: #4CAF50;}
+
+    .button {
+        background-color: #1f1f1f;
+        color: white;
+        font-size: 16px;
+        font-weight: bold;
+        border: none;
+        cursor: pointer;
+    }
+ </style>
+<body>
+
+ <!-- (sit on top) -->
+<!-- <div class="w3-bar w3-top w3-large w3-theme-d5" style="z-index:4">
+    <a class="w3-bar-item" style="font-family: Verdana, Geneva, Tahoma, sans-serif; height:43px"></a>
+    <img class="w3-bar-item w3-right w3-button" style="height: 45px;" href="/"
+</div> -->
+<!-- !PAGE CONTENT! -->
+<div class="w3-main">
+ <!-- Forgot Password Container -->
+    <div class="w3-container options w3-animate-left" id="forgot" style="margin-bottom: 50px">
+        <div class="w3-panel w3-card w3-content" style="width: 364px; min-width: 364px; max-width: 364px; margin-top: 18%; border-radius: 5px; background-color: #E8F0FE;">
+                <!-- Header -->
+            <header class="w3-container w3-center">
+                <h5><b style="color: #191919;">SEND CONFIRMATION CODE    <i class="fa fa-level-down fa-lg"></i></b></h5>
+            </header>
+            <h6 class="w3-center" id="forgot_response_message"></h6>
+            <form id="forgotform" class="w3-container" method="post">
+                <div>
+                    <p>
+                        <label style="color: #191919;"><i class="fa fa-user"></i>   Username</label>
+                        <input class="w3-input w3-animate-input" name="forgot_username" id="forgot_username" type="text" style="border-radius: 5px;">
+                    </p>
+                    <div class="w3-center">
+                        <p>
+                            <button id="forgot_button" class="button w3-button w3-round" type="submit"><i class="fa fa-check"></i> SEND CODE </button>
+                        </p>
+                    </div>
+                    <div class="w3-center">
+                        <p>
+                            <a id="login_link" style="cursor: pointer;"><i class="fa fa-sign-in"></i> Login </button>
+                        </p>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- Forgot Password Confirmation Container -->
+
+    <!-- Footer -->
+    <!-- <footer class="w3-container w3-padding-8 w3-center w3-theme-d5" style="bottom: 0%; height: 55px; position:fixed; left: 0px; bottom: 0px; right: 0px;"> -->
+       <!--<p><i class="fa fa-copyright fa-fw"></i>2019 by <a href="https://www.bla-bla.com/" target="_blank">bla bla</a></p>-->
+       <!--<p><i class="fa fa-copyright fa-fw"></i>     2019</p>-->
+    <!-- </footer> -->
+
+<!-- End page content -->
+</div>
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+ <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+
+<script>
+    var islogout = '{{ islogout }}';
+    var message = '{{ message }}';
+    var status = '{{ status }}';
+    var username = '{{ username }}'
+
+    if(status == 200) {
+        window.location.href = '/dash/';
+    }
+    else if(status == 201) {
+        $('#login').hide();
+        $('#change').show();
+        document.getElementById('change_username').defaultValue = username;
+    }
+    else {
+        $('#response_message').show()
+        $('#response_message').html('<div class="alert"><h6 class="w3-center">' + message + '</h6></div>');
+        //setTimeout(function(){
+        //    $('#response_message').hide()
+        //}, 3000)
+    }
+
+
+    var forgot_message = '{{ forgot_message }}'
+    var forgot_status = '{{ forgot_status }}'
+
+    if(forgot_status == 200) {
+        $('#login').hide();
+        $('#change').hide();
+        $('#confirmation').show();
+        $('#forgot').hide();
+    }
+    else {
+        $('#forgot_response_message').show()
+        $('#forgot_response_message').html('<div class="alert"><h6 class="w3-center">' + forgot_message + '</h6></div>');
+    }
+
+    var confirm_message = '{{ confirm_message }}'
+    var confirm_status = '{{ confirm_status }}'
+    if(confirm_status == 200) {
+        $('#login').show();
+        $('#confirmation').hide();
+    }
+    else {
+        $('#confirmation_response_message').show()
+        $('#confirmation_response_message').html('<div class="alert"><h6 class="w3-center">' + confirm_message + '</h6></div>');
+    }
+
+</script>
+
+</body>
+
+</html>
